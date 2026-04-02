@@ -1,9 +1,10 @@
 package server
 
 import (
-	"fmt"
 	"net"
 	"strconv"
+
+	"github.com/Mohamed-Moumni/servgo/internal/parser"
 )
 
 type Server struct {
@@ -42,13 +43,8 @@ func (s *Server) handleConnection(conn net.Conn) {
 		case <-s.quit:
 			return
 		default:
-			buff := make([]byte, 1024)
-
-			n, err := conn.Read(buff)
-			if err != nil {
-				fmt.Println(err)
-			}
-			fmt.Println(buff[:n])
+			parser := parser.New(conn)
+			parser.Start()
 			// parser
 			// executor
 			// response
