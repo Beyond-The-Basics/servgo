@@ -1,7 +1,12 @@
-package cmd
+package main
 
-import "fmt"
+import (
+	"github.com/Mohamed-Moumni/servgo/internal/server"
+)
+
 
 func main() {
-	fmt.Println("Hello, World")
+	instance := server.New(80)
+
+	instance.CreateServer()
 }
