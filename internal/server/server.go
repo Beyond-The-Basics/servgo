@@ -7,15 +7,15 @@ import (
 )
 
 type Server struct {
-	port	int
-	quit	chan struct{}
+	port int
+	quit chan struct{}
 }
 
 func New(_port int) *Server {
 	return &Server{port: _port}
 }
 
-func (s *Server)CreateServer() error {
+func (s *Server) CreateServer() error {
 	servicePort := ":" + strconv.Itoa(s.port)
 	conn, err := net.Listen("tcp", servicePort)
 
@@ -34,7 +34,7 @@ func (s *Server)CreateServer() error {
 	}
 }
 
-func (s *Server)handleConnection(conn net.Conn) {
+func (s *Server) handleConnection(conn net.Conn) {
 	defer conn.Close()
 
 	for {
@@ -43,7 +43,7 @@ func (s *Server)handleConnection(conn net.Conn) {
 			return
 		default:
 			buff := make([]byte, 1024)
-	
+
 			n, err := conn.Read(buff)
 			if err != nil {
 				fmt.Println(err)
